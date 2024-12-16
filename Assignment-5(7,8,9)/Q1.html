@@ -8,7 +8,19 @@ with a username, password and login button. Add CSS to assign proper styling to 
             <title>Q1</title>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
             <script>
-                
+                function validatePassword() {
+                    const password = document.getElementById('password').value;
+                    const passwordError = document.getElementById('passwordError');
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+
+        if (!regex.test(password)) {
+            passwordError.textContent = "Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 digit.";
+            return false;
+        }
+
+        passwordError.textContent = ""; // Clear error message
+        return true; // Allow form submission
+    }
             </script>
         </head>
     </html>
