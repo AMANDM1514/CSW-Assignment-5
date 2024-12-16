@@ -29,7 +29,12 @@ with a username, password and login button. Add CSS to assign proper styling to 
                 <p>Welcome to the school management system. Login to access in the school system.</p>
                 <form id="logonForm" onsubmit="return validatePassword()">
                     <label for="username">Username: </label>
-                    <
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password: </label>
+                    <input ytpe="password" id="password" name="password" required>
+                    <div id="passwordError" class="error"></div>
+                    <input type=s"submit" value="Login">
+                </form>
             </div>
         </body>
     </html>
