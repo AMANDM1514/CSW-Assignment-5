@@ -18,38 +18,53 @@ with a username, password and login button. Add CSS to assign proper styling to 
                         return false;
                     }
                     
-                    passwordError.textContent = ""; // Clear error message
-                    return true; // Allow form submission
+                    passwordError.textContent = "";
+                    return true;
                 }
             </script>
             <style>
-                .header{
-                    background-color: lightgreen;
+                body{
+                    margin: 0;
+                    background-color: rgb(151, 226, 226);
+                }
+                header{
+                    background-color: rgb(67, 227, 67);
                     color: white;
                     text-align: center;
                     padding: 10px;
+                    font-size: 20px;
                 }
                 .container{
+                    font-size: 18px;
                     background-color: white;
                     border-radius: 5px;
+                    padding: 20px;
+                    max-width: 600px;
+                    margin: 20px auto;
+                    background-color: white;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    /* text-align: center; */
                 }
                 label{
                     display: block;
                     margin-bottom: 5px;
                 }
                 input[ type="submit"]{
-                    background-color: #4CAF50;
+                    background-color: #3ec443;
                     color: white;
                     padding: 10px;
-                    border-radius: 4px;
+                    border-radius: 6px;
                     cursor: pointer;
+                    width: 100%;
+                    border: none;
+                    font-size: 18px;
                 }
                 input[type="submit"]:hover{
-                    background-color: #45a049;
+                    background-color: #2bae31;
                 }
                 .error{
                     color: red;
-                    font-size: 14px;
+                    font-size: 15px;
                 }
             </style>
         </head>
@@ -59,13 +74,14 @@ with a username, password and login button. Add CSS to assign proper styling to 
             </header>
             <div class="container">
                 <h1>Login Page</h1>
-                <p>Welcome to the school management system. Login to access in the school system.</p>
-                <form id="logonForm" onsubmit="return validatePassword()">
+                <p>Welcome to the school management system. Login for the access of the school system.</p>
+                <form action="/action_page.php"  onsubmit="return validatePassword()">
                     <label for="username">Username: </label>
-                    <input type="text" id="username" name="username" required>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required style="width:100%; padding: 10px; margin: auto; "><br><br>
                     <label for="password">Password: </label>
-                    <input ytpe="password" id="password" name="password" required>
-                    <div id="passwordError" class="error"></div>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required style="width:100%; padding: 10px; margin: auto;">
+                    <br><br>
+                    <div id="passwordError" class="error"></div><br>
                     <input type="submit" value="Login">
                 </form>
             </div>
