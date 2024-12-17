@@ -2,12 +2,151 @@
 Create a student table using HTML with Name, Age, Semester, and Registration Number. The alternative rows of the table should be of different colors. 
 Add Edit and Delete buttons for each row and implement their functions. Style the Edit and Delete buttons with different colors.-->
 
-<DOCTYPE! html>
-  <html>
-    <head>
-      <title>Q2</title>
-    </head>
-    <body>
-      
-    </body>
-  </html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Q2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".btn-delete").click(function(){
+                $(this).closest("tr").remove();
+            });
+            $(".btn-edit").click(function(){
+            let row=$(this).closest("tr");
+            if($(this).text() === "Edit"){
+                row.find("td").not(":last").each(function(){
+                    let currentText=$(this).text();
+                    $(this).html(`<input type="text" value="${currentText}">`);
+                });
+                $(this).text("Save");
+            } else{
+                row.find("td").not(":last").each(function(){
+                    let inputValue=$(this).find("input").val();
+                    $(this).text(inputValue);
+                });
+                $(this).text("Edit");
+            }
+        });
+        
+        });
+    </script>
+    <style>
+        body{
+            margin: 0;
+        }
+        header{
+            background-color: rgb(67, 227, 67);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            width: 100%;
+            display: block;
+        }
+        table{
+            width: 80%;
+            margin: 0 auto;
+        }
+        table, th, td{
+            border: 2px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 20px;  
+            font-size: 17px;    
+        }
+        th{
+            background-color: yellow;
+        }
+        td{
+            background-color: lightgreen;
+            padding: 15px;
+        }
+        button{
+            
+            margin: 0 auto;
+            /* width: 60%; */
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            cursor: pointer;
+            color: white;
+        }
+        
+        .button1{
+            background-color: #0d6efd;
+            display: block;
+            /* width: 50%; */
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+        button.button1:hover{
+            background-color: rgb(87, 68, 234);
+        }
+        .button2{
+            background-color: #dc3545;
+        }
+        button.button2:hover{
+            background-color: rgb(206, 4, 4);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Student Information</h1>
+    </header><br>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Semester</th>
+                <th>Registration No.</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Cena</td>
+                <td>45</td>
+                <td>3</td>
+                <td>2341013041</td>
+                <td><button type="edit-button" class="btn-edit button1">Edit</button><br>
+                    <button type="remove-button" class="btn-delete button2">Remove</button><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Brock Lesner</td>
+                <td>40</td>
+                <td>3</td>
+                <td>2341013541</td>
+                <td><button type="edit-button" class="btn-edit button1">Edit</button><br>
+                    <button type="remove-button" class="btn-delete button2">Remove</button><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Randy Ortan</td>
+                <td>35</td>
+                <td>3</td>
+                <td>2341013147</td>
+                <td><button type="edit-button" class="btn-edit button1">Edit</button><br>
+                    <button type="remove-button" class="btn-delete button2">Remove</button><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Roman Reigns</td>
+                <td>27</td>
+                <td>3</td>
+                <td>2341011006</td>
+                <td><button type="edit-button" class="btn-edit button1">Edit</button><br>
+                    <button type="remove-button" class="btn-delete button2">Remove</button><br>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+</html>
