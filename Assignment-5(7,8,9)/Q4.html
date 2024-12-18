@@ -3,13 +3,207 @@ group these buttons and with Bootstrap class and crease drop down option under A
 carousel to display achievement Gallery images.-->
 
 
-<DOCTYPE! html>
-  <html>
-    <head>
-      <title>Q4</title>
-    </head>
-    <body>
-      
-    </body>
-  </html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Q4</title>
+    <script>
+        $(document).ready(function(){
+            //navbar
+            $('#btn-student-info').click(function () {
+                $('#student-info-section').removeClass('d-none');
+                $('#achievements-section').addClass('d-none');
+            });
+
+            $('#dropdown-gallery').click(function () {
+                $('#achievements-section').removeClass('d-none');
+                $('#student-info-section').addClass('d-none');
+            });
+            
+            //edit and delete
+            $(".btn-primary").click(function () {
+                let row = $(this).closest("tr");
+                if ($(this).text() === "Edit") {
+                    row.find("td").not(":last").each(function () {
+                        let currentText = $(this).text();
+                        $(this).html(`<input type="text" value="${currentText}">`);
+                    });
+                    $(this).text("Save");
+                } else {
+                    row.find("td").not(":last").each(function () {
+                        let inputValue = $(this).find("input").val();
+                        $(this).text(inputValue);
+                    });
+                    $(this).text("Edit");
+                }
+            });
+
+
+            $('.btn-danger').click(function () {
+                $(this).closest('tr').remove();
+            });
+
+            // search option
+            $(document).ready(function(){
+                $('#searchBar').on('input', function(){
+                    const value=$(this).val().toLowerCase();
+                    $('#studentTable tbody tr').filter(function(){
+                        $(this).toggle($(this).find('td:first').text().toLowerCase().indexOf(value)> -1);
+                    });    
+                });
+            });
+
+        });
+    </script>
+    <style>
+        body{
+            margin: 0;
+        }
+        header{
+            background-color: rgb(67, 227, 67);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            width: 100%;
+            display: block;
+        }
+        table{
+            width: 80%;
+            margin: 0 auto;
+        }
+        table, th, td{
+            border: 2px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 20px;  
+            font-size: 17px;    
+        }
+        th{
+            background-color: yellow;
+        }
+        td{
+            background-color: lightgreen;
+            padding: 15px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>School Management System</h1>
+    </header>
+    <div class="container mt-4">
+        <!-- Navigation Buttons -->
+        <div class="btn-group w-100 mb-4">
+            <button type="button" class="btn btn-primary w-100 p-3" id="btn-student-info">Admission</button>
+            <div class="btn-group w-100">
+                <button type="button" class="btn btn-secondary dropdown-toggle p-3" data-toggle="dropdown">
+                    Achievements
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" id="dropdown-gallery">Gallery</a></li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-warning w-100 p-3" id="btn-alumni">Alumni</button>
+        </div>
+
+        <!--Student Table-->
+        <div id="student-info-section">
+            
+            <input type="text" id="searchBar" class="form-control search-bar" placeholder="Search by name"><br>
+            <table id="studentTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Semester</th>
+                        <th>Registration No.</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Cena</td>
+                        <td>45</td>
+                        <td>3</td>
+                        <td>2341013041</td>
+                        <td><button type="edit-button" class="btn btn-primary">Edit</button><br><br>
+                            <button type="remove-button" class="btn btn-danger">Remove</button><br>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td>Brock Lesner</td>
+                        <td>40</td>
+                        <td>3</td>
+                        <td>2341013541</td>
+                        <td><button type="edit-button" class="btn btn-primary">Edit</button><br><br>
+                            <button type="remove-button" class="btn btn-danger">Remove</button><br>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td>Randy Ortan</td>
+                        <td>35</td>
+                        <td>3</td>
+                        <td>2341013147</td>
+                        <td><button type="edit-button" class="btn btn-primary">Edit</button><br><br>
+                            <button type="remove-button" class="btn btn-danger">Remove</button><br>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td>Roman Reigns</td>
+                        <td>27</td>
+                        <td>3</td>
+                        <td>2341011006</td>
+                        <td><button type="edit-button" class="btn btn-primary">Edit</button><br><br>
+                            <button type="remove-button" class="btn btn-danger">Remove</button><br>
+                        </td>
+                    </tr>
+                </tbody>
+        
+            </table>
+        </div>
+
+        <!--Achievements Section-->
+        <div id="achievements-section" class="d-none">
+            <h2 class="text-center">Achievements Gallery</h2>
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7QW471_aRS31-hbn4xB6IR5Uma32XHKsYBVupSEP6lrGttBpMOPfUfMCwDnuWtyX0hqQ&usqp=CAU" class="d-block w-100" alt="Achievement 1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Achievement 1</h5>
+                            <p>Details about achievement 1.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://fastercapital.com/i/Academic-Achievement--Comparing-Decile-Scores-in-Student-Assessments--The-Future-of-Academic-Achievement-and-Decile-Scores.webp" class="d-block w-100" alt="Achievement 2">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Achievement 2</h5>
+                            <p>Details about achievement 2.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-target="#carouselExample" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-target="#carouselExample" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
   
